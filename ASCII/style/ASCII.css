@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+#webcamContainer, #asciiContainer, #imageUpload {
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#webcamContainer, #imageUpload {
+  height: 5vh;
+}
+#asciiContainer img {
+  margin-right: 40px;
+}
+
+#asciiArt {
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 8px;
+  white-space: pre-wrap;
+  padding: 10px;
+}
+
+label {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
