@@ -8,6 +8,7 @@ The ASCII character set includes a variety of characters, including letters, num
 * Shading and Density
 * Grid Arrangement
 * Size and Scale
+* zoom in & out
 * download function
 ![2](https://github.com/phos589/ASCII/assets/140889919/16d61ad7-6624-4411-8791-0a43964a2996)
 
