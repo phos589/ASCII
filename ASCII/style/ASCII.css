@@ -14,6 +14,12 @@ body {
   justify-content: center;
   align-items: center;
 }
+#asciiContainer{
+  transition: transform 0.3s ease;
+}
+#zoom-in {
+  margin: 10px;
+}
 
 #webcamContainer, #imageUpload {
   height: 5vh;

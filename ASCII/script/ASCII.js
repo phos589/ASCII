@@ -37,18 +37,18 @@ function handleImageUpload(event) {
 
                 // Add download functionality
                 downloadButton.addEventListener('click', () => {
-                    const lines = asciiArtElement.textContent.split('\n'); // Use the textContent of the element
-                    const lineHeight = 6; // Adjust based on font size
-                    const charWidth = 6; // Adjust based on font size
-                    const asciiWidth = lines.reduce((maxWidth, line) => Math.max(maxWidth, line.length), 0) * charWidth; // Adjust width
+                    const lines = asciiArtElement.textContent.split('\n');
+                    const lineHeight = 6; 
+                    const charWidth = 6;
+                    const asciiWidth = lines.reduce((maxWidth, line) => Math.max(maxWidth, line.length), 0) * charWidth; 
                     const asciiHeight = lines.length * lineHeight;
                 
                     const borderSize = 10; // Adjust the border size
                     const canvasAscii = document.createElement('canvas');
                     const ctxAscii = canvasAscii.getContext('2d');
-                    canvasAscii.width = asciiWidth + 2 * borderSize; // Add border to width
-                    canvasAscii.height = asciiHeight + 2 * borderSize; // Add border to height
-                    ctxAscii.font = '12px monospace'; // Adjust font and size
+                    canvasAscii.width = asciiWidth + 2 * borderSize; 
+                    canvasAscii.height = asciiHeight + 2 * borderSize;
+                    ctxAscii.font = '12px monospace'; 
                 
                     // Fill the entire canvas with white color
                     ctxAscii.fillStyle = 'white';
@@ -129,7 +129,7 @@ function handleImageDrop(imageFile) {
 
 
 function generateAsciiArt(imageData, width, height) {
-    const asciiCharacters = ['@', '#', '$', '&', 'o', ':', '*', '.', ' ', '/']; // Adjust characters as desired
+    const asciiCharacters = ['@', '#', '$', '&', 'o', ':', '*', '.', ' ',]; // Adjust characters as desired
     let asciiArt = '';
 
     for (let y = 0; y < height - 1; y++) { // Exclude the last line
@@ -147,3 +147,27 @@ function generateAsciiArt(imageData, width, height) {
     return asciiArt;
 }
 
+const zoomInButton = document.getElementById('zoom-in');
+const zoomOutButton = document.getElementById('zoom-out');
+const zoomedContent = document.getElementById('asciiContainer');
+
+
+let scale = 1;
+    const minScale = 0.4;
+    const maxScale = 1;
+
+    zoomInButton.addEventListener('click', () => {
+      if (scale < maxScale && (zoomedContent.clientWidth * (scale + 0.1)) <= zoomedContent.clientWidth * maxScale) {
+        scale += 0.1;
+        zoomedContent.style.transform = `scale(${scale})`;
+      }
+    });
+
+    zoomOutButton.addEventListener('click', () => {
+      if (scale > minScale) {
+        scale -= 0.1;
+        zoomedContent.style.transform = `scale(${scale})`;
+      }
+    });
+
+zoomedContent.style.transformOrigin = 'top';
