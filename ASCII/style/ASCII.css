@@ -4,7 +4,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100vh;
   font-family: Arial, sans-serif;
 }
@@ -28,7 +27,7 @@ body {
   font-size: 14px;
   line-height: 8px;
   white-space: pre-wrap;
-  padding: 10px;
+  padding: 2px;
 }
 
 label {
@@ -37,4 +36,33 @@ label {
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#imageInput {
+  display: none;
+}
+
+.custom-file-input {
+  background-color: #2747d4;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+}
+.custom-file-input:hover{
+  background-color: #3477db;
 }
