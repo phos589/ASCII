@@ -2,7 +2,7 @@
 ASCII art is a creative form of expression that involves using characters from the ASCII (American Standard Code for Information Interchange) character set to create visual representations or designs. 
 The ASCII character set includes a variety of characters, including letters, numbers, symbols, and control characters, each of which is assigned a unique numerical value.
 
-![1](https://github.com/phos589/ASCII/assets/140889919/af387e08-ba26-4215-b865-ce0a428d51c4)
+![1](https://github.com/phos589/ASCII/assets/140889919/4e4b6acd-4da2-42d1-b4fe-da2110af7f11)
 
 * Character Mapping
 * Shading and Density
