@@ -2,8 +2,17 @@ const imageInput = document.getElementById('imageInput');
 const uploadedImage = document.getElementById('uploadedImage');
 const asciiArtElement = document.getElementById('asciiArt');
 const downloadButton = document.getElementById('downloadButton');
+const textColorPicker = document.getElementById('textColorPicker');
+
+downloadButton.disabled = true;
 
 imageInput.addEventListener('change', handleImageUpload);
+
+textColorPicker.addEventListener('input', () => {
+    const selectedColor = textColorPicker.value;
+    asciiArtElement.style.color = selectedColor;
+});
+
 
 function handleImageUpload(event) {
     const file = event.target.files[0];
@@ -34,44 +43,7 @@ function handleImageUpload(event) {
 
                 // Show the uploaded image
                 uploadedImage.src = e.target.result;
-
-                // Add download functionality
-                downloadButton.addEventListener('click', () => {
-                    const lines = asciiArtElement.textContent.split('\n');
-                    const lineHeight = 6; 
-                    const charWidth = 6;
-                    const asciiWidth = lines.reduce((maxWidth, line) => Math.max(maxWidth, line.length), 0) * charWidth; 
-                    const asciiHeight = lines.length * lineHeight;
-                
-                    const borderSize = 10; // Adjust the border size
-                    const canvasAscii = document.createElement('canvas');
-                    const ctxAscii = canvasAscii.getContext('2d');
-                    canvasAscii.width = asciiWidth + 2 * borderSize; 
-                    canvasAscii.height = asciiHeight + 2 * borderSize;
-                    ctxAscii.font = '12px monospace'; 
-                
-                    // Fill the entire canvas with white color
-                    ctxAscii.fillStyle = 'white';
-                    ctxAscii.fillRect(0, 0, canvasAscii.width, canvasAscii.height);
-                
-                    // Set text color to black
-                    ctxAscii.fillStyle = 'black';
-                
-                    lines.forEach((line, lineIndex) => {
-                        ctxAscii.fillText(line, borderSize, borderSize + (lineIndex + 1) * lineHeight);
-                    });
-                
-                    const dataURL = canvasAscii.toDataURL('image/png');
-                    const link = document.createElement('a');
-                    link.href = dataURL;
-                    link.download = 'ascii_image.png';
-                
-                    // Programmatically trigger a click event on the link
-                    link.click();
-                
-                    // Clean up
-                    setTimeout(() => URL.revokeObjectURL(dataURL), 1000);
-                });
+                downloadButton.disabled = false;
 
             };
             img.src = e.target.result;
@@ -120,6 +92,8 @@ function handleImageDrop(imageFile) {
 
                 // Display ASCII art
                 asciiArtElement.textContent = asciiArt;
+                downloadButton.disabled = false;
+
             };
             img.src = e.target.result;
         };
@@ -127,6 +101,42 @@ function handleImageDrop(imageFile) {
     }
 }
 
+// Add download functionality
+downloadButton.addEventListener('click', () => {
+    const lines = asciiArtElement.textContent.split('\n');
+    const lineHeight = 6;
+    const charWidth = 6;
+    const asciiWidth = lines.reduce((maxWidth, line) => Math.max(maxWidth, line.length), 0) * charWidth;
+    const asciiHeight = lines.length * lineHeight;
+
+    const borderSize = 10;
+    const canvasAscii = document.createElement('canvas');
+    const ctxAscii = canvasAscii.getContext('2d');
+    canvasAscii.width = asciiWidth + 2 * borderSize;
+    canvasAscii.height = asciiHeight + 2 * borderSize;
+
+    // Fill the entire canvas with white color
+    ctxAscii.fillStyle = 'white';
+    ctxAscii.fillRect(0, 0, canvasAscii.width, canvasAscii.height);
+
+    ctxAscii.font = '12px monospace';
+    ctxAscii.fillStyle = textColorPicker.value; // Use the selected text color
+
+    lines.forEach((line, lineIndex) => {
+        ctxAscii.fillText(line, borderSize, borderSize + (lineIndex + 1) * lineHeight);
+    });
+
+    const dataURL = canvasAscii.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'ascii_image.png';
+
+    // Programmatically trigger a click event on the link
+    link.click();
+
+    // Clean up
+    setTimeout(() => URL.revokeObjectURL(dataURL), 1000);
+});
 
 function generateAsciiArt(imageData, width, height) {
     const asciiCharacters = ['@', '#', '$', '&', 'o', ':', '*', '.', ' ',]; // Adjust characters as desired
